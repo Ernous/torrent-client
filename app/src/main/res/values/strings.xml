@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Torrent Client</string>
+    
+    <!-- Main Screen -->
+    <string name="no_torrents">Нет активных торрентов</string>
+    <string name="add_torrent">Добавить торрент</string>
+    <string name="pause_all">Приостановить все</string>
+    <string name="resume_all">Возобновить все</string>
+    
+    <!-- Add Torrent -->
+    <string name="add_torrent_title">Добавить торрент</string>
+    <string name="magnet_link_hint">Вставьте magnet-ссылку</string>
+    <string name="save_path_hint">Путь для сохранения</string>
+    <string name="add_torrent_btn">Добавить</string>
+    <string name="cancel">Отмена</string>
+    <string name="browse">Обзор</string>
+    
+    <!-- Torrent Details -->
+    <string name="torrent_details">Детали торрента</string>
+    <string name="files">Файлы</string>
+    <string name="info">Информация</string>
+    <string name="peers">Пиры</string>
+    <string name="trackers">Трекеры</string>
+    
+    <!-- Torrent States -->
+    <string name="state_stopped">Остановлен</string>
+    <string name="state_queued">В очереди</string>
+    <string name="state_metadata_downloading">Получение метаданных</string>
+    <string name="state_checking">Проверка</string>
+    <string name="state_downloading">Загружается</string>
+    <string name="state_seeding">Раздается</string>
+    <string name="state_finished">Завершен</string>
+    <string name="state_error">Ошибка</string>
+    
+    <!-- File Priorities -->
+    <string name="priority_dont_download">Не загружать</string>
+    <string name="priority_low">Низкий</string>
+    <string name="priority_normal">Обычный</string>
+    <string name="priority_high">Высокий</string>
+    <string name="priority_maximum">Максимальный</string>
+    
+    <!-- Actions -->
+    <string name="pause">Пауза</string>
+    <string name="resume">Продолжить</string>
+    <string name="remove">Удалить</string>
+    <string name="remove_with_files">Удалить с файлами</string>
+    <string name="select_all">Выбрать все</string>
+    <string name="deselect_all">Отменить выбор</string>
+    
+    <!-- Progress -->
+    <string name="progress_format">%1$.1f%%</string>
+    <string name="speed_format">%1$s/с</string>
+    <string name="eta_format">ETA: %1$s</string>
+    <string name="peers_format">Пиры: %1$d (%2$d раздающих)</string>
+    <string name="ratio_format">Рейтинг: %1$.2f</string>
+    
+    <!-- Settings -->
+    <string name="settings">Настройки</string>
+    <string name="default_save_path">Путь сохранения по умолчанию</string>
+    <string name="max_download_speed">Максимальная скорость загрузки (KB/s)</string>
+    <string name="max_upload_speed">Максимальная скорость отдачи (KB/s)</string>
+    <string name="max_connections">Максимум соединений</string>
+    <string name="sequential_download">Последовательная загрузка</string>
+    
+    <!-- Errors -->
+    <string name="error_invalid_magnet">Неверная magnet-ссылка</string>
+    <string name="error_storage_permission">Требуется разрешение на запись в память</string>
+    <string name="error_add_torrent">Ошибка добавления торрента</string>
+    <string name="error_torrent_not_found">Торрент не найден</string>
+    
+    <!-- Notifications -->
+    <string name="notification_channel_name">Торрент загрузки</string>
+    <string name="notification_channel_description">Уведомления о состоянии торрент-загрузок</string>
+    <string name="notification_downloading">Загружается %1$d торрент(ов)</string>
+    
+    <!-- File Sizes -->
+    <string name="size_bytes">%1$d B</string>
+    <string name="size_kb">%1$.1f KB</string>
+    <string name="size_mb">%1$.1f MB</string>
+    <string name="size_gb">%1$.1f GB</string>
+    <string name="size_tb">%1$.1f TB</string>
+</resources>
