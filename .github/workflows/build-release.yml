@@ -1,0 +1,139 @@
+name: Build and Release APK
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+        
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+        
+      - name: Build ARM64 APK
+        run: ./gradlew assembleRelease
+        env:
+          ANDROID_ABI_FILTER: arm64-v8a
+          
+      - name: Rename ARM64 APK
+        run: |
+          mkdir -p outputs
+          cp app/build/outputs/apk/release/app-release-unsigned.apk outputs/TorrentClient-arm64-v8a.apk
+          
+      - name: Clean build
+        run: ./gradlew clean
+        
+      - name: Build ARMv7 APK
+        run: ./gradlew assembleRelease
+        env:
+          ANDROID_ABI_FILTER: armeabi-v7a
+          
+      - name: Rename ARMv7 APK
+        run: cp app/build/outputs/apk/release/app-release-unsigned.apk outputs/TorrentClient-armeabi-v7a.apk
+        
+      - name: Clean build
+        run: ./gradlew clean
+        
+      - name: Build x86_64 APK
+        run: ./gradlew assembleRelease
+        env:
+          ANDROID_ABI_FILTER: x86_64
+          
+      - name: Rename x86_64 APK
+        run: cp app/build/outputs/apk/release/app-release-unsigned.apk outputs/TorrentClient-x86_64.apk
+        
+      - name: Build Universal APK
+        run: ./gradlew assembleRelease
+        
+      - name: Rename Universal APK
+        run: cp app/build/outputs/apk/release/app-release-unsigned.apk outputs/TorrentClient-universal.apk
+        
+      - name: Get version from tag
+        id: get_version
+        run: |
+          if [[ $GITHUB_REF == refs/tags/* ]]; then
+            echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+          else
+            echo "VERSION=dev-$(date +%Y%m%d-%H%M%S)" >> $GITHUB_OUTPUT
+          fi
+          
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.get_version.outputs.VERSION }}
+          release_name: Release ${{ steps.get_version.outputs.VERSION }}
+          body: |
+            Android Torrent Client Release
+            
+            Supported architectures:
+            - ARM64 (arm64-v8a)
+            - ARMv7 (armeabi-v7a)
+            - x86_64
+            - Universal (all architectures)
+            
+            Changes:
+            - Torrent management with magnet links support
+            - File selection with priority control
+            - Download progress tracking
+            - Peer and seed statistics
+          draft: false
+          prerelease: false
+          
+      - name: Upload ARM64 APK
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./outputs/TorrentClient-arm64-v8a.apk
+          asset_name: TorrentClient-arm64-v8a.apk
+          asset_content_type: application/vnd.android.package-archive
+          
+      - name: Upload ARMv7 APK
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./outputs/TorrentClient-armeabi-v7a.apk
+          asset_name: TorrentClient-armeabi-v7a.apk
+          asset_content_type: application/vnd.android.package-archive
+          
+      - name: Upload x86_64 APK
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./outputs/TorrentClient-x86_64.apk
+          asset_name: TorrentClient-x86_64.apk
+          asset_content_type: application/vnd.android.package-archive
+          
+      - name: Upload Universal APK
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./outputs/TorrentClient-universal.apk
+          asset_name: TorrentClient-universal.apk
+          asset_content_type: application/vnd.android.package-archive
