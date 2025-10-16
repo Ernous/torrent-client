@@ -96,15 +96,16 @@ class TorrentListAdapter(
         }
 
         private fun getStateText(state: TorrentState): String {
+            val context = binding.root.context
             return when (state) {
-                TorrentState.STOPPED -> root.context.getString(R.string.state_stopped)
-                TorrentState.QUEUED -> root.context.getString(R.string.state_queued)
-                TorrentState.METADATA_DOWNLOADING -> root.context.getString(R.string.state_metadata_downloading)
-                TorrentState.CHECKING -> root.context.getString(R.string.state_checking)
-                TorrentState.DOWNLOADING -> root.context.getString(R.string.state_downloading)
-                TorrentState.SEEDING -> root.context.getString(R.string.state_seeding)
-                TorrentState.FINISHED -> root.context.getString(R.string.state_finished)
-                TorrentState.ERROR -> root.context.getString(R.string.state_error)
+                TorrentState.STOPPED -> context.getString(R.string.state_stopped)
+                TorrentState.QUEUED -> context.getString(R.string.state_queued)
+                TorrentState.METADATA_DOWNLOADING -> context.getString(R.string.state_metadata_downloading)
+                TorrentState.CHECKING -> context.getString(R.string.state_checking)
+                TorrentState.DOWNLOADING -> context.getString(R.string.state_downloading)
+                TorrentState.SEEDING -> context.getString(R.string.state_seeding)
+                TorrentState.FINISHED -> context.getString(R.string.state_finished)
+                TorrentState.ERROR -> context.getString(R.string.state_error)
             }
         }
 
