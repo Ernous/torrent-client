@@ -89,8 +89,8 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
     
     // TORRENT ENGINE DEPENDENCY
-    // Import torrent engine from GitHub via JitPack
-    implementation("com.github.Ernous:torrent-engine:v1.0.1")
+    // Import torrent engine from GitHub via JitPack (latest from main branch)
+    implementation("com.github.Ernous:torrent-engine:-SNAPSHOT")
     
     // Testing
     testImplementation("junit:junit:4.13.2")
