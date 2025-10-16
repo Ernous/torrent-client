@@ -76,9 +76,9 @@ class MainActivity : AppCompatActivity(), AddTorrentDialogFragment.AddTorrentLis
         handleMagnetIntent(intent)
     }
     
-    override fun onNewIntent(intent: Intent?) {
+    override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
-        intent?.let { handleMagnetIntent(it) }
+        handleMagnetIntent(intent)
     }
     
     private fun requestStoragePermissions() {

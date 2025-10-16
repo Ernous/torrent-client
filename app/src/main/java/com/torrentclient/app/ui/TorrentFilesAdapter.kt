@@ -73,11 +73,11 @@ class TorrentFilesAdapter(
 
         private fun getPriorityText(priority: FilePriority): String {
             return when (priority) {
-                FilePriority.DONT_DOWNLOAD -> root.context.getString(R.string.priority_dont_download)
-                FilePriority.LOW -> root.context.getString(R.string.priority_low)
-                FilePriority.NORMAL -> root.context.getString(R.string.priority_normal)
-                FilePriority.HIGH -> root.context.getString(R.string.priority_high)
-                FilePriority.MAXIMUM -> root.context.getString(R.string.priority_maximum)
+                FilePriority.DONT_DOWNLOAD -> binding.root.context.getString(R.string.priority_dont_download)
+                FilePriority.LOW -> binding.root.context.getString(R.string.priority_low)
+                FilePriority.NORMAL -> binding.root.context.getString(R.string.priority_normal)
+                FilePriority.HIGH -> binding.root.context.getString(R.string.priority_high)
+                FilePriority.MAXIMUM -> binding.root.context.getString(R.string.priority_maximum)
             }
         }
 
@@ -93,12 +93,13 @@ class TorrentFilesAdapter(
         }
 
         private fun showPriorityDialog(file: TorrentFile) {
+            val context = binding.root.context
             val priorities = arrayOf(
-                root.context.getString(R.string.priority_dont_download),
-                root.context.getString(R.string.priority_low),
-                root.context.getString(R.string.priority_normal),
-                root.context.getString(R.string.priority_high),
-                root.context.getString(R.string.priority_maximum)
+                context.getString(R.string.priority_dont_download),
+                context.getString(R.string.priority_low),
+                context.getString(R.string.priority_normal),
+                context.getString(R.string.priority_high),
+                context.getString(R.string.priority_maximum)
             )
             
             val currentPriorityIndex = when (file.priority) {
@@ -109,7 +110,7 @@ class TorrentFilesAdapter(
                 FilePriority.MAXIMUM -> 4
             }
             
-            MaterialAlertDialogBuilder(root.context)
+            MaterialAlertDialogBuilder(context)
                 .setTitle(file.getName())
                 .setSingleChoiceItems(priorities, currentPriorityIndex) { dialog, which ->
                     val newPriority = when (which) {
@@ -123,7 +124,7 @@ class TorrentFilesAdapter(
                     onFilePriorityChanged(file, newPriority)
                     dialog.dismiss()
                 }
-                .setNegativeButton(root.context.getString(R.string.cancel), null)
+                .setNegativeButton(context.getString(R.string.cancel), null)
                 .show()
         }
     }

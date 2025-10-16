@@ -131,9 +131,9 @@ object FileUtils {
     fun getFileTypeIcon(filename: String): Int {
         return when {
             isVideoFile(filename) -> android.R.drawable.ic_media_play
-            isAudioFile(filename) -> android.R.drawable.ic_menu_camera
-            isArchiveFile(filename) -> android.R.drawable.ic_menu_archive
-            else -> android.R.drawable.ic_menu_gallery
+            isAudioFile(filename) -> android.R.drawable.ic_lock_silent_mode
+            isArchiveFile(filename) -> android.R.drawable.ic_menu_save
+            else -> android.R.drawable.ic_menu_info_details
         }
     }
 
