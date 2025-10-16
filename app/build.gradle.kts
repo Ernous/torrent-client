@@ -16,6 +16,15 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        
+        // ABI filters for splitting APKs by architecture
+        val abiFilter = System.getenv("ANDROID_ABI_FILTER")
+        if (abiFilter != null) {
+            ndk {
+                abiFilters.clear()
+                abiFilters.add(abiFilter)
+            }
+        }
     }
 
     buildTypes {
