@@ -90,7 +90,7 @@ dependencies {
     
     // TORRENT ENGINE DEPENDENCY
     // Import torrent engine from GitHub via JitPack
-    implementation("com.github.Ernous:torrent-engine:+")
+    implementation("com.github.Ernous:torrent-engine:v1.0.0")
     
     // Testing
     testImplementation("junit:junit:4.13.2")
